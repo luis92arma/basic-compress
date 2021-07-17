@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    {% load compress %}
+    <meta charset="UTF-8">
+    <title>Blogs</title>
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    {% endcompress %}
+</head>
+<body>
+    <div class="row">
+    {% for blog in blogs %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ blog.title }}</h5>
+            <p class="card-text">{{ blog.content|truncatechars:70 }}</p>
+            <a href="{% url 'get_blog_detail' blog.id %}" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+    {% endfor %}
+    </div>
+    {% compress js %}
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    {% endcompress %}
+</body>
+</html>
